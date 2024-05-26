@@ -242,7 +242,7 @@ public class Registration extends JFrame implements PinListener {
 
     
     // main for testing
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         new Registration("user", "pass");
-    }
+    }*/
 }

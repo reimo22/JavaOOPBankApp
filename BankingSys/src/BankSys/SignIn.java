@@ -87,16 +87,27 @@ class SignIn extends JFrame implements ActionListener {
         lblNewLabel.setBounds(482, 457, 61, 16);
         getContentPane().add(lblNewLabel);
         
-                password = new JLabel("Password");
-                password.setBounds(373, 283, 87, 24);
-                getContentPane().add(password);
-                password.setFont(new Font("Tamil MN", Font.PLAIN, 15));
-                
-                        title = new JLabel("BiBo.");
-                        title.setBounds(421, 64, 164, 86);
-                        getContentPane().add(title);
-                        title.setForeground(Color.BLACK);
-                        title.setFont(new Font("STIX Two Text", Font.PLAIN, 68));
+        // Add MouseListener to the label
+        lblNewLabel.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getSource() == lblNewLabel) {
+                    // Create and show the SignUp frame
+                    SignUp signUpFrame = new SignUp();
+                    signUpFrame.setVisible(true);
+                }
+            }
+        });
+        
+			password = new JLabel("Password");
+			password.setBounds(373, 283, 87, 24);
+			getContentPane().add(password);
+			password.setFont(new Font("Tamil MN", Font.PLAIN, 15));
+			
+			title = new JLabel("BiBo.");
+			title.setBounds(421, 64, 164, 86);
+			getContentPane().add(title);
+			title.setForeground(Color.BLACK);
+			title.setFont(new Font("STIX Two Text", Font.PLAIN, 68));
     }
 
     public void actionPerformed(ActionEvent e) {

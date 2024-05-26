@@ -26,6 +26,15 @@ public class SignUp extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	
+    /*public static void main(String[] args) {
+        // Set up the frame
+        SignupExample frame = new SignupExample();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }*/
+    
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -111,24 +120,16 @@ public class SignUp extends JFrame {
 
             // Add login logic here
             if (password.equals(confirmpassword)) {
-                JOptionPane.showMessageDialog(this, "Login successful!");
-                // Proceed with the login process
+                Registration register = new Registration(username, password);
+                register.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(this, "Passwords do not match!");
             }
-        } else if (e.getSource() == reset) {
+        } /*else if (e.getSource() == reset) {
             usernametxt.setText("");
             passtxt.setText("");
             confirmpasstxt.setText("");
-        }
-    }
-
-    public static void main(String[] args) {
-        // Set up the frame
-        SignupExample frame = new SignupExample();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+        }*/
     }
 	    
 

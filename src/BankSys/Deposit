@@ -44,14 +44,18 @@ public class deposit extends JFrame {
         depositField.setBounds(51, 208, 484, 40);
         panel.add(depositField);
         depositButton = new JButton("Deposit");
-        depositButton.setBounds(162, 366, 273, 40);
+        depositButton.setBounds(51, 378, 236, 40);
         panel.add(depositButton);
-        
-                // Create components
-                balanceLabel = new JLabel("Current Balance: $" + balance);
-                balanceLabel.setFont(new Font("Sitka Subheading", Font.BOLD, 13));
-                balanceLabel.setBounds(400, 23, 156, 14);
-                panel.add(balanceLabel);
+                
+                JButton cancelbtn = new JButton("Cancel");
+                cancelbtn.setBounds(297, 378, 236, 40);
+                panel.add(cancelbtn);
+                
+                        // Create components
+                        balanceLabel = new JLabel("Current Balance: $" + balance);
+                        balanceLabel.setBounds(474, 24, 156, 14);
+                        getContentPane().add(balanceLabel);
+                        balanceLabel.setFont(new Font("Sitka Subheading", Font.BOLD, 13));
 
         // Add action listener to the deposit button
         depositButton.addActionListener(new ActionListener() {

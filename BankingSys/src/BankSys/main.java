@@ -10,6 +10,6 @@ public class main {
 	 public static void main(String[] args) {
 	        SignIn frame = new SignIn();
 	        frame.setVisible(true);
-	        frame.setUndecorated(true);
+	        //frame.setUndecorated(true);
 	    }
 }

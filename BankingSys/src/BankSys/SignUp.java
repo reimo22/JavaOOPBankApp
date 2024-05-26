@@ -12,20 +12,31 @@ import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-public class SignUp extends JFrame {
+public class SignUp extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField usernametxt;
 	private JPasswordField passtxt;
 	private JPasswordField confirmpasstxt;
+    private JButton signUpButton;
 
 	/**
 	 * Launch the application.
 	 */
+	
+    /*public static void main(String[] args) {
+        // Set up the frame
+        SignupExample frame = new SignupExample();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+    }*/
+    
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -96,39 +107,28 @@ public class SignUp extends JFrame {
 		lblNewLabel_1_1.setBounds(41, 295, 145, 14);
 		panel.add(lblNewLabel_1_1);
 		
-		JButton btnNewButton = new JButton("Sign Up");
-		btnNewButton.setBounds(95, 394, 122, 39);
-		panel.add(btnNewButton);
+		signUpButton = new JButton("Sign Up");
+		signUpButton.setBounds(95, 394, 122, 39);
+		signUpButton.addActionListener(this);
+		panel.add(signUpButton);
 	
 	}
-	public void actionPerformed(ActionEvent e, Object SignIn) {
-        if (e.getSource() == SignIn) {
+	
+	public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == signUpButton) {
             String username = usernametxt.getText();
-            @SuppressWarnings("deprecation")
-            String password = passtxt.getText();
-            @SuppressWarnings("deprecation")
-            String confirmpassword = confirmpasstxt.getText();
+            String password = new String(passtxt.getPassword());
+            String confirmpassword = new String(confirmpasstxt.getPassword());
 
-            // Add login logic here
+            // Validate the input
             if (password.equals(confirmpassword)) {
-                JOptionPane.showMessageDialog(this, "Login successful!");
-                // Proceed with the login process
+                Registration register = new Registration(username, password);
+                register.setVisible(true);
+                dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "Passwords do not match!");
             }
-        } else if (e.getSource() == reset) {
-            usernametxt.setText("");
-            passtxt.setText("");
-            confirmpasstxt.setText("");
         }
-    }
-
-    public static void main(String[] args) {
-        // Set up the frame
-        SignupExample frame = new SignupExample();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
     }
 	    
 

@@ -2,6 +2,9 @@ package BankSys;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.Window.Type;
 
@@ -87,29 +90,58 @@ class SignIn extends JFrame implements ActionListener {
         lblNewLabel.setBounds(482, 457, 61, 16);
         getContentPane().add(lblNewLabel);
         
-                password = new JLabel("Password");
-                password.setBounds(373, 283, 87, 24);
-                getContentPane().add(password);
-                password.setFont(new Font("Tamil MN", Font.PLAIN, 15));
-                
-                        title = new JLabel("BiBo.");
-                        title.setBounds(421, 64, 164, 86);
-                        getContentPane().add(title);
-                        title.setForeground(Color.BLACK);
-                        title.setFont(new Font("STIX Two Text", Font.PLAIN, 68));
+        // Add MouseListener to the label
+        lblNewLabel.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                if (e.getSource() == lblNewLabel) {
+                    // Create and show the SignUp frame
+                    SignUp signUpFrame = new SignUp();
+                    signUpFrame.setVisible(true);
+                }
+            }
+        });
+        
+			password = new JLabel("Password");
+			password.setBounds(373, 283, 87, 24);
+			getContentPane().add(password);
+			password.setFont(new Font("Tamil MN", Font.PLAIN, 15));
+			
+			title = new JLabel("BiBo.");
+			title.setBounds(421, 64, 164, 86);
+			getContentPane().add(title);
+			title.setForeground(Color.BLACK);
+			title.setFont(new Font("STIX Two Text", Font.PLAIN, 68));
     }
 
+    // replace this
+    @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == login) {
-            String username = tusername.getText();
-            String password = tpassword.getText();
-            // Add login logic here
-            JOptionPane.showMessageDialog(this, "Login successful!");
-        } else if (e.equals(e)) {
-            tusername.setText("");
-            tpassword.setText("");
+            String inputUsername = tusername.getText();
+            String inputPassword = tpassword.getText();
+
+            // Check if the username and password match
+            if (authenticateUser(inputUsername, inputPassword)) {
+                JOptionPane.showMessageDialog(this, "Login successful!");
+                // Optionally, you can close the login frame and open the main application frame here
+            } else {
+                JOptionPane.showMessageDialog(this, "Invalid username or password. Please try again.");
+            }
         }
     }
 
- 
+    private boolean authenticateUser(String username, String password) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("NewAccount.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(",");
+                if (parts.length >= 2 && parts[0].equals(username) && parts[1].equals(password)) {
+                    return true; // Username and password match
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle exceptions appropriately in a production environment
+        }
+        return false; // No match found
+    }
 }

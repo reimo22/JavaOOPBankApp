@@ -9,10 +9,13 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Withdraw extends JFrame {
+public class WithdrawForm extends JFrame {
     private double currentBalance = 1000.0; // Example starting balance
     private JLabel balanceLabel;
     private JTextField withdrawField;
@@ -21,7 +24,7 @@ public class Withdraw extends JFrame {
     private JPanel panel;
     private JButton withdrawButton_1;
 
-    public Withdraw() {
+    public WithdrawForm() {
     	getContentPane().setBackground(new Color(255, 255, 240));
         // Setting up the frame
         setTitle("Withdraw Money");
@@ -73,8 +76,6 @@ public class Withdraw extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 handleWithdraw();
             }
-        	public void actionPerformed(ActionEvent e) {
-        	}
         });
     }
 
@@ -100,7 +101,7 @@ public class Withdraw extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new Withdraw().setVisible(true);
+                new WithdrawForm().setVisible(true);
             }
         });
     }

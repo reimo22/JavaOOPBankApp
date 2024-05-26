@@ -13,14 +13,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class deposit extends JFrame {
+public class DepositForm extends JFrame {
 
     private JLabel balanceLabel;
     private JTextField depositField;
     private JButton depositButton;
     private double balance;
 
-    public deposit() {
+    public DepositForm() {
     	getContentPane().setBackground(new Color(255, 255, 240));
         // Initialize the frame
         setTitle("Deposit Frame");
@@ -82,7 +82,7 @@ public class deposit extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new deposit().setVisible(true);
+                new DepositForm().setVisible(true);
             }
         });
     }

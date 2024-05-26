@@ -1,0 +1,104 @@
+package BankSys;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Dashboard extends JFrame {
+    private static final long serialVersionUID = 1L;
+    private double balance = 0.0;  // Initialize balance
+    private JLabel balanceLabel;
+    private JTextField amountField;
+    private JButton depositButton;
+    private JButton withdrawButton;
+    private JPanel panel;
+
+    public Dashboard() {
+        // Set up the frame
+        setTitle("Dashboard");
+        setSize(719, 637);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        // Initialize components
+        balanceLabel = new JLabel("Current Balance: $0.00", SwingConstants.CENTER);
+        balanceLabel.setBounds(20, 109, 167, 38);
+        amountField = new JTextField(10);
+        amountField.setBounds(20, 158, 673, 317);
+        depositButton = new JButton("Deposit");
+        depositButton.setBounds(53, 499, 290, 55);
+        withdrawButton = new JButton("Withdraw");
+        withdrawButton.setBounds(372, 499, 290, 55);
+        getContentPane().setLayout(null);
+        getContentPane().add(balanceLabel);
+        getContentPane().add(amountField);
+        getContentPane().add(depositButton);
+        getContentPane().add(withdrawButton);
+        
+        panel = new JPanel();
+        panel.setBounds(0, 0, 703, 85);
+        getContentPane().add(panel);
+                panel.setLayout(null);
+        
+                // Add components to the frame
+                JLabel lblBobi = new JLabel("Bobi.", SwingConstants.CENTER);
+                lblBobi.setBackground(new Color(0, 255, 255));
+                lblBobi.setFont(new Font("Perpetua Titling MT", Font.BOLD, 30));
+                lblBobi.setBounds(-16, 24, 175, 50);
+                panel.add(lblBobi);
+
+        // Add action listeners to buttons
+        depositButton.addActionListener(new DepositButtonListener());
+        withdrawButton.addActionListener(new WithdrawButtonListener());
+
+        // Make the frame visible
+        setVisible(true);
+    }
+
+    private class DepositButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                double amount = Double.parseDouble(amountField.getText());
+                if (amount > 0) {
+                    balance += amount;
+                    updateBalanceLabel();
+                    JOptionPane.showMessageDialog(Dashboard.this, "Deposit successful.");
+                } else {
+                    JOptionPane.showMessageDialog(Dashboard.this, "Please enter a positive amount.");
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(Dashboard.this, "Invalid amount. Please enter a valid number.");
+            }
+        }
+    }
+
+    private class WithdrawButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            try {
+                double amount = Double.parseDouble(amountField.getText());
+                if (amount > 0 && amount <= balance) {
+                    balance -= amount;
+                    updateBalanceLabel();
+                    JOptionPane.showMessageDialog(Dashboard.this, "Withdrawal successful.");
+                } else if (amount > balance) {
+                    JOptionPane.showMessageDialog(Dashboard.this, "Insufficient balance.");
+                } else {
+                    JOptionPane.showMessageDialog(Dashboard.this, "Please enter a positive amount.");
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(Dashboard.this, "Invalid amount. Please enter a valid number.");
+            }
+        }
+    }
+
+    private void updateBalanceLabel() {
+        balanceLabel.setText(String.format("Current Balance: $%.2f", balance));
+    }
+
+    public static void main(String[] args) {
+        new Dashboard();
+    }
+}
